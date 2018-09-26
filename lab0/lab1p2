@@ -1,0 +1,20 @@
+Lyman Shen
+COEN177 Lab1 pipeline file questions
+
+Write number of lines to output file
+wc -l q1.txt > output.txt
+
+Find number of unique lines
+sort q1.txt | uniq -u | wc -l
+
+Find number of duplicate lines
+sort q1.txt | uniq -d | wc -l
+
+Print 5th line
+sed -n 5p q1.txt
+
+Print duplicate lines between line 5 and 10
+sed -n '5,10p' q1.txt | sort | uniq -d
+
+Print error message and redirect to error.log file
+ls q1.txt abc.txt 2>&1 | tee -a error.log
