@@ -1,0 +1,13 @@
+Write-up
+
+To add a message to the startup banner when booting up minix, I used grep to search for the banner in the kernel file. This lead me to finding the announce function at line 268 of main.c. So I added a printf statement at the end of the announce function to add the message, which says "This is added by Lyman Shen".
+
+To test this change, I made world in minix, reboot the machine, and then made world again. After this is done, I can see the change when I reboot minix and see my customized message on startup.
+
+Minix's scheduling algorithm is pick_proc() located at line 1298 of proc.c in the kernel folder. What Minix's current scheduling algorithm does is to loop through each queue from higheset priority to lowest priority, and choosing the first queue with processes to run the first process in that queue. If a high priority queue turns out to not have a process in it, the queue is skipped and the OS checks if there is a process in the next, slightly lower priority queue. If there turns out to be no processes in any of the queues, than no process is selected to run.
+
+To change the scheduling algorithm, I made changes to pick_proc(). I recognized that the iterating variable q in the for loop represents the priority of queue to choose, so I substituted some variables so the priority number of the queue is randomized. This is only done about 10% of the time to make sure the system still runs fast enough to compile the system in a reasonable time. I also found out that the first 6 queues are queues containing essential processes for the OS, so I should not change that. The main line added to the queue that caused the priority to be changed is 
+q = rand() % (NR_SCHED_QUEUES - NUM) + NUM,
+where NUM is 7 and used to make sure the essential queues are not being changed.
+
+Similar to testing the banner message, I also made world in minix, reboot the machine, and made world again. After restarting, the changes to the scheduling algorithm applies. As a result, this changed system runs slightly slower than the original system. This is particularly noticable when making world, which take much less time on the original system compared to the system with my changes.

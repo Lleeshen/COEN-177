@@ -1,0 +1,35 @@
+Report questions
+
+How many queues are there?
+
+According to proc.h, there are 15 priority queues. In the explanation for NR_SCHED_QUEUES being 16, it says the number has to be the lowest priority + 1.
+
+What queue is highest and lowest priority?
+
+As I saw from reading proc.h as referenced in the previous question, Queue 15 is the lowest priority. Also, since the queues 0 - 6 cannot be changed without the system crashing, I can reasonably assume that queue 0 has the most priority.
+
+What C expression gives first ready process in queue
+
+For a queue q, rdy_head[q] is the first ready process if it exists.
+
+What happens if that queue does not have a process
+
+If the queue does not have a process, nothing happens, and the next queue is checked. Usually the next queue is a queue of lower priority, but with my modifications, a random queue is checked.
+
+Behavior of changes
+
+Queues affected
+
+Every non-essential queue, i.e Queues 7 through 15, are affected.
+
+Probability that randomization take place
+
+There is about 1/10 chance that the priority of the queue is changed.
+
+Parameter being randomized
+
+The priority queue that is used to choose the process is altered so there is a chance of a process in a lower priority queue is picked.
+
+Difference between original system and modified system
+
+The modified system runs slightly slower since processes not essential to the OS are randomized in the priority, causing priority inversion for some processes.

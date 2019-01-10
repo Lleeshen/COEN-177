@@ -1,0 +1,50 @@
+Lyman Shen
+COEN 177
+
+Final Project Report
+
+In this project, I would answer the question "What is the best Page Replacement alogrithm to use in an
+Operating System". There would be more tests done compared to the Page Replacement Lab done earlier this
+quarter.
+
+For the final lab, I intend to test different Page Replacement algorithms more than we did for Assignment 3.
+The FIFO, Second Chance, Least Recently Used algorithms would be tested on a greater range of input. Some
+possible variance for the input include the size of the input, which represents the number of pages accessed,
+and the range of possible page values, which represent the total number of virtual pages. The last variable
+in those tests would be the number of physical pages. For those tests to be realistic, those algorithms
+should use a linked list structure to store pages. When evaluating how good a page replacement algorithm is,
+there are two factors to consider: the proportion of accessed pages that was a page fault and the algorithm
+efficiency. In the previous lab on page replacement, we only considered page faults when determining how good
+those algorithm is.
+
+To evaluate the proportion of accessed pages that was a page fault, a counter should be used to keep track of
+all page faults in the implementation of the page replacement algorithms. To evaluate on how efficient the
+algorithm is, the process will be timed with the time command at execution. The statistic that would be used
+is average time taken for 1 input, which is the total time to run the algorithm divided by the size of the input.
+
+The number of page faults and input size found in the algorithm can be outputted to stdout and piped to another
+file for analysis as well.
+
+Random input files of 1024 inputs, 2048 inputs, 4096 inputs, and 8192 inputs would be tested. The input ranges
+would be 0-511 for a portion of the tests and 0-1023 for the others to simulate the difference of the number
+of virtual pages. For the executables, we would run the algorithm with the 64 physical pages, 128 physical
+pages, and 256 physical pages. Each test would be done 3 times to make sure results are consistent. One weakness
+is that those tests are not realistic because in reality, there will be many pages that the OS is trying access
+was just recently accessed. Ideally, realistic page inputs would also be tested, but it is difficult to simulate.
+
+For analysis of results, the rate of page faults has more priority than the efficiency of algorithm. However,
+depending on what the data looks like, if there is minimal gain in reducing page faults while sacrificing a
+lot of speed on the algorithm, the faster algorithm that has a slightly higher page fault rate may be better
+for performance on average. Choosing the optimal algorithm is also depends on the goal of the user. If the
+user wants a fastest guaranteed speed, than the algorithm that generates the fewest page faults is always
+better. A graph can be shown to see how either page fault or speed is dependent on the algorithm used,
+input size, number of virtual pages, and number of physical pages. I expect that a larger input size would
+cause number of page faults and time to increase linearly. I also expect that a larger number of virtual
+pages to slightly increase the number of page faults and keep average time the about the same. As supported
+by the experiment done in the previous Page Replacement Lab, the number of page faults slightly decrease with
+more physical pages, but I expect the time to complete the algorithm to stay about the same. Since those
+algorithm are tested with random input, I don't expect any algorithm to do much better than any other algorithm.
+
+The rate of page faults would matter because page faults would significantly slow down a system when they occur,
+which is why this is prioritized over the time for the page replacement algorithms to complete. However, if the time
+to deal with page inputs is too long in the algorithm, then every process in the system would be slowed down.
